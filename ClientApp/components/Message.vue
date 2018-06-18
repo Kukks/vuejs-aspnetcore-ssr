@@ -5,8 +5,18 @@
     </div>
 </template>
 
-<script>
-export default {
-  props: ['message']
-}
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
+  props: ["message"]
+});
 </script>
+
+<style lang="sass" scoped>
+    div{
+        h2{
+            color:green;
+        }
+    }
+</style>
+

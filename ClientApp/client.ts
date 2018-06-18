@@ -1,4 +1,4 @@
-import NProgress from 'nprogress'
+import * as NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -11,6 +11,10 @@ import {
 } from './app'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
+
+
+declare const __INITIAL_STATE__:any;
+
 Vue.use(BootstrapVue)
 store.replaceState(__INITIAL_STATE__)
 
@@ -34,8 +38,8 @@ router.onReady(() => {
 
     // for each newly loaded components, asynchorously load data to them
     Promise.all(activated.map(c => {
-      if (c.asyncData) {
-        return c.asyncData({store, route: to})
+      if ((c as any).asyncData) {
+        return (c as any).asyncData({store, route: to})
       }
     })).then(() => {
       NProgress.done()

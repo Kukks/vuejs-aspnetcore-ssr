@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { fetchInitialMessages, fetchMessages } from './actions'
-import minBy from 'lodash/minBy'
+import * as _ from 'lodash';
+
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: { messages: [], lastFetchedMessageDate: -1},
+  state: { messages: [], lastFetchedMessageDate: -1 },
 
   mutations: {
     INITIAL_MESSAGES: (state, payload) => {
@@ -15,7 +16,8 @@ const store = new Vuex.Store({
     },
     FETCH_MESSAGES: (state, payload) => {
       state.messages = state.messages.concat(payload.messages)
-      state.lastFetchedMessageDate = minBy(state.messages, 'date').date
+      const min = _.minBy(state.messages, 'date')
+      state.lastFetchedMessageDate = min ? (min as any).date : null
     }
   },
   actions: {
