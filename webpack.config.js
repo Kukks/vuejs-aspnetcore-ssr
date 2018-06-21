@@ -1,47 +1,44 @@
-const path = require('path')
+const path = require("path");
 
-const autoprefixer = require('autoprefixer');
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const autoprefixer = require("autoprefixer");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 // using webpack-merge so we don't have to repeat common configuration attributes twice
-const merge = require('webpack-merge')
+const merge = require("webpack-merge");
 
-module.exports = (env) => {
+module.exports = env => {
   const sharedConfig = () => ({
     mode: "development",
     stats: { modules: false },
-    resolve: { extensions: ['.js', '.vue', '.ts'] },
+    resolve: { extensions: [".js", ".vue", ".ts"] },
     output: {
-      filename: '[name].js',
-      publicPath: '/dist/'
+      filename: "[name].js",
+      publicPath: "/dist/"
     },
     module: {
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: "vue-loader"
         },
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          loader: "babel-loader",
           include: __dirname,
-          exclude: file => (
-            /node_modules/.test(file) &&
-            !/\.vue\.js/.test(file)
-          )
+          exclude: file => /node_modules/.test(file) && !/\.vue\.js/.test(file)
         },
         {
           test: /\.ts$/,
-          exclude: file => (
-            /node_modules/.test(file) &&
-            !/\.vue\.ts/.test(file)
-          ),
+          exclude: file => /node_modules/.test(file) && !/\.vue\.ts/.test(file),
           use: [
-            'babel-loader',{
-            loader: 'ts-loader',
-            options: {
-              appendTsSuffixTo: [/\.vue$/]
-            }
-          }]
+            "babel-loader",
+            {
+              loader: "ts-loader",
+              options: {
+                appendTsSuffixTo: [/\.vue$/]
+              }
+            },
+            "ts-nameof-loader"
+          ]
         },
         {
           test: /\.(scss|sass|css)$/,
@@ -50,63 +47,59 @@ module.exports = (env) => {
             {
               resourceQuery: /module/,
               use: [
-                'vue-style-loader',
+                "vue-style-loader",
                 {
-                  loader: 'css-loader',
+                  loader: "css-loader",
                   options: {
                     modules: true,
-                    localIdentName: '[local]_[hash:base64:5]'
+                    localIdentName: "[local]_[hash:base64:5]"
                   }
                 },
                 {
-                  loader: 'postcss-loader',
+                  loader: "postcss-loader",
                   options: {
                     plugins: () => [autoprefixer()]
                   }
                 },
-                'sass-loader'
+                "sass-loader"
               ]
             },
             // this matches plain `<style>` or `<style scoped>`
             {
               use: [
-                'vue-style-loader',
-                'css-loader',
+                "vue-style-loader",
+                "css-loader",
                 {
-                  loader: 'postcss-loader',
+                  loader: "postcss-loader",
                   options: {
                     plugins: () => [autoprefixer()]
                   }
                 },
-                'sass-loader'
+                "sass-loader"
               ]
             }
           ]
-
         }
       ]
     },
-    plugins: [
-      new VueLoaderPlugin(),
-
-    ]
-  })
+    plugins: [new VueLoaderPlugin()]
+  });
 
   const clientBundleConfig = merge(sharedConfig(), {
-    entry: { 'main-client': './ClientApp/client.ts' },
+    entry: { "main-client": "./ClientApp/client.ts" },
     output: {
-      path: path.join(__dirname, 'wwwroot/dist')
+      path: path.join(__dirname, "wwwroot/dist")
     }
-  })
+  });
 
   const serverBundleConfig = merge(sharedConfig(), {
-    target: 'node',
-    entry: { 'main-server': './ClientApp/server.ts' },
+    target: "node",
+    entry: { "main-server": "./ClientApp/server.ts" },
     output: {
-      libraryTarget: 'commonjs2',
-      path: path.join(__dirname, 'wwwroot/dist')
+      libraryTarget: "commonjs2",
+      path: path.join(__dirname, "wwwroot/dist")
     }
-  })
+  });
 
-  return [clientBundleConfig, serverBundleConfig]
-}
+  return [clientBundleConfig, serverBundleConfig];
+};

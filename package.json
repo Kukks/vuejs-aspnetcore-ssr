@@ -9,9 +9,14 @@
   "author": "Ferry To",
   "license": "MIT",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "ts-nameof": "^1.0.0",
+    "vue-class-component": "^6.2.0",
+    "vue-property-decorator": "^6.1.0",
+    "vuex-typex": "^3.0.1"
+  },
   "devDependencies": {
-    "@types/lodash": "^4.14.109",
+    "@types/lodash": "^4.14.110",
     "@types/nprogress": "0.0.29",
     "aspnet-prerendering": "3.0.1",
     "aspnet-webpack": "^3.0.0",
@@ -32,6 +37,7 @@
     "serialize-javascript": "^1.5.0",
     "style-loader": "^0.21.0",
     "ts-loader": "^4.4.1",
+    "ts-nameof-loader": "^1.0.1",
     "typescript": "^2.9.2",
     "vue": "^2.5.13",
     "vue-loader": "^15.2.4",

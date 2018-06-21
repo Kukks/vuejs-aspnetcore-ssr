@@ -5,17 +5,37 @@
     </div>
 </template>
 
-<script>
-import { mapGetters, mapActions } from "vuex";
+<script lang="ts">
+import messageStore from "../vuex/message/message";
 import Message from "./Message.vue";
+import Component from "vue-class-component";
+import Vue from "vue";
+import { Store } from "vuex";
 
-export default {
-  components: { Message },
-  computed: mapGetters(["messages", "lastFetchedMessageDate"]),
-  methods: mapActions(["fetchMessages"]),
-  asyncData({ store, context }) {
-    let origin = context ? context.origin : window.location.origin;
-    return store.dispatch("fetchInitialMessages", origin);
+@Component({
+  components: {
+    Message
   }
-};
+})
+export default class MessagesComponent extends Vue {
+  get messages() {
+    return messageStore.messages;
+  }
+  get lastFetchedMessageDate() {
+    return messageStore.lastFetchedMessageDate;
+  }
+
+  fetchMessages(date: Date | -1) {
+    return messageStore.dispatchFetchMessages(date);
+  }
+
+  static asyncData(payload: {  store: Store<any>, context: { origin?:string;}  }) {
+    const isServer = typeof window === "undefined";
+    let origin =
+      payload && payload.context && payload.context.origin
+        ? payload.context.origin
+        : isServer ? "" : window.location.origin;
+    return messageStore.dispatchFetchInitialMessages(origin);
+  }
+}
 </script>
