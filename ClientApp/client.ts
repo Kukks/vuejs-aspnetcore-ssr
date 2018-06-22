@@ -1,5 +1,5 @@
 import * as NProgress from 'nprogress'
-import "./theme/base.scss";
+import "./styles/app.scss";
 import {
     app,
     router,
