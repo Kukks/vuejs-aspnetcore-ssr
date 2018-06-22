@@ -26,10 +26,10 @@ const storeBuilder = getStoreBuilder<RootState>().module(
 );
 
 // getters
-const messagesGetter = storeBuilder.read(state => state.messages, "messages");
+const messagesGetter = storeBuilder.read((state: MessageState) => state.messages, nameof( initialMessageState.messages));
 const lastFetchedMessageDateGetter = storeBuilder.read(
-  state => state.lastFetchedMessageDate,
-  "lastFetchedMessageDate"
+  (state: MessageState) => state.lastFetchedMessageDate,
+  nameof( initialMessageState.lastFetchedMessageDate)
 );
 
 // mutations
