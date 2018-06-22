@@ -2,9 +2,9 @@
 import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import { getStoreBuilder } from 'vuex-typex';
-import { MessageState } from './message/message';
-import  "./message/message"
-
+import { MessageState } from './modules/message';
+import  "./modules"
+export * from "./modules"
 export interface RootState
 {
     message: MessageState

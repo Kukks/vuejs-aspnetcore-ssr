@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts">
-import messageStore from "../vuex/message/message";
 import Message from "./Message.vue";
 import Component from "vue-class-component";
 import Vue from "vue";
 import { Store } from "vuex";
+import message from "../store/modules/message";
 
 @Component({
   components: {
@@ -19,14 +19,14 @@ import { Store } from "vuex";
 })
 export default class MessagesComponent extends Vue {
   get messages() {
-    return messageStore.messages;
+    return message.messages;
   }
   get lastFetchedMessageDate() {
-    return messageStore.lastFetchedMessageDate;
+    return message.lastFetchedMessageDate;
   }
 
   fetchMessages(date: Date | -1) {
-    return messageStore.dispatchFetchMessages(date);
+    return message.dispatchFetchMessages(date);
   }
 
   static asyncData(payload: {  store: Store<any>, context: { origin?:string;}  }) {
@@ -35,7 +35,7 @@ export default class MessagesComponent extends Vue {
       payload && payload.context && payload.context.origin
         ? payload.context.origin
         : isServer ? "" : window.location.origin;
-    return messageStore.dispatchFetchInitialMessages(origin);
+    return message.dispatchFetchInitialMessages(origin);
   }
 }
 </script>
