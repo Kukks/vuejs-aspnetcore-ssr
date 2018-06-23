@@ -65,7 +65,10 @@ const prodConfig = {
         sourceMap: true // set to true if you want JS source maps
       }),
       new OptimizeCSSAssetsPlugin({})
-    ]
+    ],
+    splitChunks: {
+      chunks: "all"
+    }
   },
   plugins: [
     new MiniCssExtractPlugin({
