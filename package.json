@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init": "npm i && npm rebuild node-sass"
+    "init": "npm i && npm rebuild node-sass",
+    "build": "npm run init && webpack --config webpack.config.js",
+    "build:production": "npm run init && webpack --config webpack.prod.js"
   },
   "author": "Ferry To",
   "license": "MIT",
@@ -27,12 +29,15 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap-vue": "^2.0.0-rc.11",
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.10",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.10",
+    "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
     "npm-install-webpack-plugin": "^4.0.5",
     "nprogress": "^0.2.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
     "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.3",
     "serialize-javascript": "^1.5.0",
@@ -41,6 +46,7 @@
     "ts-nameof": "^1.0.0",
     "ts-nameof-loader": "^1.0.1",
     "typescript": "^2.9.2",
+    "uglifyjs-webpack-plugin": "^1.2.6",
     "vue": "^2.5.13",
     "vue-loader": "^15.2.4",
     "vue-router": "^3.0.1",
@@ -50,7 +56,9 @@
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.3",
     "webpack-dev-middleware": "^3.1.3",
+    "webpack-dev-server": "^3.1.4",
     "webpack-hot-middleware": "^2.22.2",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "webpack-plugin-install-deps": "^4.0.5"
   }
 }
