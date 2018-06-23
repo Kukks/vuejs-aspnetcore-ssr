@@ -4,6 +4,7 @@ const autoprefixer = require("autoprefixer");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 // using webpack-merge so we don't have to repeat common configuration attributes twice
 const merge = require("webpack-merge");
+const NpmInstallPlugin = require("npm-install-webpack-plugin");
 
 module.exports = env => {
   const sharedConfig = () => ({
@@ -82,7 +83,9 @@ module.exports = env => {
         }
       ]
     },
-    plugins: [new VueLoaderPlugin()]
+      plugins: [
+          new VueLoaderPlugin(),
+          new NpmInstallPlugin()]
   });
 
   const clientBundleConfig = merge(sharedConfig(), {
