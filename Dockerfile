@@ -25,6 +25,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 
-RUN npm i
-RUN npm rebuild node-sass --force
 ENTRYPOINT ["dotnet", "vdn.dll"]

@@ -15,13 +15,13 @@ Vue.use(BootstrapVue)
 store.replaceState(__INITIAL_STATE__)
 
 router.onReady(() => {
-  router.beforeResolve((to, from, next) => {
+  router.beforeResolve((to: any, from: any, next: any) => {
     const matched = router.getMatchedComponents(to)
     const prevMatched = router.getMatchedComponents(from)
 
     // compare two list of components from previous route and current route
     let diffed = false
-    const activated = matched.filter((c, i) => {
+    const activated = matched.filter((c : any, i: number) => {
       return diffed || (diffed = (prevMatched[i] !== c))
     })
 
@@ -33,7 +33,7 @@ router.onReady(() => {
     NProgress.start()
 
     // for each newly loaded components, asynchorously load data to them
-    Promise.all(activated.map(c => {
+    Promise.all(activated.map((c:any) => {
       if ((c as any).asyncData) {
         return (c as any).asyncData({store, route: to})
       }

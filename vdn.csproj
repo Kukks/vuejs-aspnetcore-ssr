@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <DockerTargetOS>Linux</DockerTargetOS>
   </PropertyGroup>
 
   <ItemGroup>

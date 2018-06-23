@@ -11,7 +11,7 @@ const router = new VueRouter({
   routes: [
         { path: '/', component: Dashboard },
         { path: '/messages', component: Messages }
-  ]
+  ] as any
 })
 
 export default router

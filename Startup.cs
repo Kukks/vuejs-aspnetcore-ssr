@@ -36,53 +36,16 @@ namespace vdn
         {
             factory.AddConsole();
             var npmScriptRunner = new NpmScriptRunner(
-                "ClientApp", "init", null, new ConcurrentDictionary<string, string>());
+                env.ContentRootPath, "init", null, null);
 
             npmScriptRunner.AttachToLogger(factory.CreateLogger("npm"));
 
-            var cont = true;
-            npmScriptRunner.StdErr.OnStreamClosed += () =>
-            {
-                cont = false;
-                Debug.Print("StdErr.OnStreamClosed");
-            };
-            npmScriptRunner.StdErr.OnReceivedChunk += chunk =>
-            {
-
-                Debug.Print("StdErr.OnReceivedChunk");
-            };
-            npmScriptRunner.StdErr.OnReceivedLine += line =>
-            {
-
-                Debug.Print("StdErr.OnReceivedLine");
-            };
-
-            npmScriptRunner.StdOut.OnStreamClosed += () =>
-            {
-
-                Debug.Print("StdErr.OnStreamClosed");
-            };
-            npmScriptRunner.StdOut.OnReceivedChunk += chunk =>
-            {
-
-                Debug.Print("StdErr.OnReceivedChunk");
-            };
-            npmScriptRunner.StdOut.OnReceivedLine += line =>
-            {
-                cont = false;
-
-                Debug.Print("StdErr.OnReceivedLine");
-            };
-            while (cont)
-            {
-                Thread.Sleep(3000);
-            }
+            Task.Run(npmScriptRunner.WaitForEnd).GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
             {   
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
-                    ProjectPath = "ClientApp",
                     HotModuleReplacement = true,
                 });
             }

@@ -10,9 +10,9 @@ export default (context: { url: string; state: any }) => {
         return reject(new Error({ code: 404 } as any));
       }
       Promise.all(
-        matchedComponents.map(Component => {
-          if ((Component as any).asyncData) {
-            return (Component as any).asyncData({ store, context });
+          matchedComponents.map((c:any)  => {
+          if ((c as any).asyncData) {
+            return (c as any).asyncData({ store, context });
           }
         })
       )
