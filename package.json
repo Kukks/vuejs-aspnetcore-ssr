@@ -30,6 +30,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.10",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.10",

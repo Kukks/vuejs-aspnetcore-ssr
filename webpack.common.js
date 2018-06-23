@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 // using webpack-merge so we don't have to repeat common configuration attributes twice
@@ -46,7 +47,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
       plugins: [
          new CleanWebpackPlugin(),
           new VueLoaderPlugin(),
-          new NpmInstallPlugin()]
+          new NpmInstallPlugin(),
+          new CopyWebpackPlugin(["./ClientApp/renderOnServer.js"], {})
+        ]
   });
 
 
