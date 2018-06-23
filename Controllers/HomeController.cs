@@ -11,8 +11,12 @@ namespace vdn.Controllers
     public class HomeController : Controller
     {
         public IActionResult Index()
-        {            
-            return View();
+        {
+            return View("~/Views/SpaView.cshtml", new SpaViewModel
+            {
+                ClientEntrypoint = "main-client",
+                ServerEntrypoint = "main-server"
+            });
         }
 
         [Route("initialMessages")]

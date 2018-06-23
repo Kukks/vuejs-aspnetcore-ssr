@@ -1,0 +1,5 @@
+﻿@model SpaViewModel
+
+<div id="app" asp-prerender-module="wwwroot/dist/renderOnServer"
+     asp-prerender-data='new { EntryPoint= @Model.ServerEntrypoint }'></div>
+<script src="~/dist/@(Model.ClientEntrypoint).js" asp-append-version="true"></script>
