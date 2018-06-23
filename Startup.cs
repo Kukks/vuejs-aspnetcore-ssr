@@ -35,15 +35,17 @@ namespace vdn
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory)
         {
             factory.AddConsole();
-            var npmScriptRunner = new NpmScriptRunner(
-                env.ContentRootPath, "init", null, null);
 
-            npmScriptRunner.AttachToLogger(factory.CreateLogger("npm"));
-
-            Task.Run(npmScriptRunner.WaitForEnd).GetAwaiter().GetResult();
 
             if (env.IsDevelopment())
-            {   
+            {
+                var npmScriptRunner = new NpmScriptRunner(
+                    env.ContentRootPath, "init", null, null);
+
+                npmScriptRunner.AttachToLogger(factory.CreateLogger("npm"));
+
+                Task.Run(npmScriptRunner.WaitForEnd).GetAwaiter().GetResult();
+
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware( new WebpackDevMiddlewareOptions {
                     HotModuleReplacement = true,

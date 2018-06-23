@@ -251,38 +251,15 @@ namespace vdn
             npmScriptRunner.StdErr.OnStreamClosed += () =>
             {
                 cont = false;
-                Debug.Print("StdErr.OnStreamClosed");
             };
-            npmScriptRunner.StdErr.OnReceivedChunk += chunk =>
-            {
-
-                Debug.Print("StdErr.OnReceivedChunk");
-            };
-            npmScriptRunner.StdErr.OnReceivedLine += line =>
-            {
-
-                Debug.Print("StdErr.OnReceivedLine");
-            };
-
             npmScriptRunner.StdOut.OnStreamClosed += () =>
             {
-
                 cont = false;
                 Debug.Print("StdErr.OnStreamClosed");
             };
-            npmScriptRunner.StdOut.OnReceivedChunk += chunk =>
-            {
-
-                Debug.Print("StdErr.OnReceivedChunk");
-            };
-            npmScriptRunner.StdOut.OnReceivedLine += line =>
-            {
-
-                Debug.Print("StdErr.OnReceivedLine");
-            };
             while (cont)
             {
-               await  Task.Delay(2000);
+               await  Task.Delay(1000);
             }
 
         }
